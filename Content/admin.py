@@ -44,7 +44,8 @@ class AuthorAdmin(admin.ModelAdmin):
 class PublisherAdmin(admin.ModelAdmin):
     list_display = [
         'name',
-        'phone_number'
+        'phone_number',
+        'get_book_count'
     ]
     list_display_links = [
         'name'
@@ -62,6 +63,14 @@ class PublisherAdmin(admin.ModelAdmin):
     list_filter = [
         'name'
     ]
+
+    def get_book_count(self, obj):
+        return obj.book_count
+
+    def get_queryset(self, request):
+        return self.model.objects.annotate(book_count=Count('book_publisher'))
+
+    get_book_count.short_description = _('Book Count')
 
 
 class BookAdmin(admin.ModelAdmin):
