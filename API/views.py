@@ -10,3 +10,8 @@ class AuthorList(generics.ListAPIView):
     queryset = get_list_or_404(ContentModels.Author)
     serializer_class = serializers.AuthorSerializer
 
+
+class PublisherList(generics.ListAPIView):
+    queryset = get_list_or_404(ContentModels.Publisher)
+    serializer_class = serializers.PublisherSerializer
+
