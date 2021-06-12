@@ -29,3 +29,6 @@ class BookByPublisherList(generics.ListAPIView):
     def get_queryset(self):
         return ContentModels.Book.objects.filter(publisher__pk=self.kwargs['pk'])
 
+
+class BookCreate(generics.CreateAPIView):
+    serializer_class = serializers.BookCreateSerializer
