@@ -29,3 +29,15 @@ class BookSerializer(serializers.ModelSerializer):
             'publisher',
             'pk'
         ]
+
+
+class BookCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContentModel.Book
+        fields = [
+            'title',
+            'number_of_pages',
+            'year_of_publication',
+            'author',
+            'publisher'
+        ]
