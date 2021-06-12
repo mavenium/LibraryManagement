@@ -22,3 +22,10 @@ class BookByAuthorList(generics.ListAPIView):
     def get_queryset(self):
         return ContentModels.Book.objects.filter(author__pk=self.kwargs['pk'])
 
+
+class BookByPublisherList(generics.ListAPIView):
+    serializer_class = serializers.BookSerializer
+
+    def get_queryset(self):
+        return ContentModels.Book.objects.filter(publisher__pk=self.kwargs['pk'])
+
