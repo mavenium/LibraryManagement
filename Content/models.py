@@ -31,6 +31,10 @@ class Author(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+    @property
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class Publisher(models.Model):
     name = models.CharField(
@@ -89,7 +93,7 @@ class Book(models.Model):
         related_name='book_author'
     )
     publisher = models.ManyToManyField(
-        Author,
+        Publisher,
         verbose_name=_('Publisher'),
         related_name='book_publisher'
     )
@@ -100,3 +104,9 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    def display_author(self):
+        return ', '.join([author.get_full_name for author in self.author.all()])
+
+    def display_publisher(self):
+        return ', '.join([publisher.name for publisher in self.publisher.all()])

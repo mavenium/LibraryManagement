@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('number_of_pages', models.PositiveSmallIntegerField(default=0, verbose_name='Number Of Pages')),
                 ('year_of_publication', models.DateField(verbose_name='Year of publication')),
                 ('author', models.ManyToManyField(related_name='book_author', to='Content.Author', verbose_name='Author')),
-                ('publisher', models.ManyToManyField(related_name='book_publisher', to='Content.Author', verbose_name='Publisher')),
+                ('publisher', models.ManyToManyField(related_name='book_publisher', to='Content.Publisher', verbose_name='Publisher')),
             ],
             options={
                 'verbose_name': 'Book',
