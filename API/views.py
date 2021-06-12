@@ -15,10 +15,3 @@ class PublisherList(generics.ListAPIView):
     queryset = get_list_or_404(ContentModels.Publisher)
     serializer_class = serializers.PublisherSerializer
 
-
-class BookByAuthorList(generics.ListAPIView):
-    serializer_class = serializers.BookSerializer
-
-    def get_queryset(self):
-        return ContentModels.Book.objects.filter(author__pk=self.kwargs['pk'])
-
