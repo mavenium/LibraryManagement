@@ -7,16 +7,19 @@ from . import serializers
 
 
 class AuthorList(generics.ListAPIView):
+    """ Return a list of Author object """
     queryset = get_list_or_404(ContentModels.Author)
     serializer_class = serializers.AuthorSerializer
 
 
 class PublisherList(generics.ListAPIView):
+    """ Return a list of Publisher object """
     queryset = get_list_or_404(ContentModels.Publisher)
     serializer_class = serializers.PublisherSerializer
 
 
 class BookByAuthorList(generics.ListAPIView):
+    """ Return a list of Book object by Author object pk """
     serializer_class = serializers.BookSerializer
 
     def get_queryset(self):
@@ -24,6 +27,7 @@ class BookByAuthorList(generics.ListAPIView):
 
 
 class BookByPublisherList(generics.ListAPIView):
+    """ Return a list of Book object by Publisher object pk """
     serializer_class = serializers.BookSerializer
 
     def get_queryset(self):
@@ -31,4 +35,5 @@ class BookByPublisherList(generics.ListAPIView):
 
 
 class BookCreate(generics.CreateAPIView):
+    """ Create Book object """
     serializer_class = serializers.BookCreateSerializer
