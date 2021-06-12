@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  library_management:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - .:/library_management
+      - library_management_static_volume:/library_management/templates/static
+      - library_management_media_volume:/library_management/media
+    restart: always
+    command: bash -c '
+      python manage.py migrate --run-syncdb &&
+      python manage.py collectstatic --noinput &&
+      python manage.py InitializeAdmin &&
+      python manage.py runserver'
+    ports:
+      - "8000:8000"
+    networks:
+      - library_management_network
+    depends_on:
+      - library_management_postgresql
+  library_management_postgresql:
+    image: postgres:latest
+    container_name: library_management_postgresql
+    volumes:
+      - library_management_postgresql:/var/lib/postgresql/data
+    restart: always
+    environment:
+      - POSTGRES_DB=${library_management}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - library_management_network
+
+volumes:
+  library_management_postgresql:
+    external: true
+  library_management_static_volume:
+    external: true
+  library_management_media_volume:
+    external: true
+
+networks:
+  library_management_network:
+    external: true
