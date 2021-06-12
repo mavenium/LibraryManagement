@@ -63,3 +63,40 @@ class Publisher(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Book(models.Model):
+    title = models.CharField(
+        verbose_name=_('Title'),
+        max_length=128,
+        null=False,
+        blank=False
+    )
+    number_of_pages = models.PositiveSmallIntegerField(
+        verbose_name=_('Number Of Pages'),
+        default=0,
+        null=False,
+        blank=False
+    )
+    year_of_publication = models.DateField(
+        verbose_name=_('Year of publication'),
+        null=False,
+        blank=False
+    )
+    author = models.ManyToManyField(
+        Author,
+        verbose_name=_('Author'),
+        related_name='book_author'
+    )
+    publisher = models.ManyToManyField(
+        Author,
+        verbose_name=_('Publisher'),
+        related_name='book_publisher'
+    )
+
+    class Meta:
+        verbose_name = _('Book')
+        verbose_name_plural = _('Books')
+
+    def __str__(self):
+        return self.title
