@@ -7,3 +7,9 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContentModel.Author
         fields = '__all__'
+
+
+class PublisherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContentModel.Publisher
+        fields = '__all__'
