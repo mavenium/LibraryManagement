@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import Count
 from django.utils.translation import ugettext_lazy as _
 
 from . import models
@@ -8,7 +9,8 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display = [
         'first_name',
         'last_name',
-        'surname'
+        'surname',
+        'get_book_count'
     ]
     list_display_links = [
         'first_name'
@@ -29,6 +31,14 @@ class AuthorAdmin(admin.ModelAdmin):
         'last_name',
         'surname'
     ]
+
+    def get_book_count(self, obj):
+        return obj.book_count
+
+    def get_queryset(self, request):
+        return self.model.objects.annotate(book_count=Count('book_author'))
+
+    get_book_count.short_description = _('Book Count')
 
 
 class PublisherAdmin(admin.ModelAdmin):
