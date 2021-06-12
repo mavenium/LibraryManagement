@@ -15,9 +15,9 @@ class Migration(migrations.Migration):
             name='Author',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(blank=True, max_length=64, null=True, verbose_name='First Name')),
-                ('last_name', models.CharField(blank=True, max_length=128, null=True, verbose_name='Last Name')),
-                ('surname', models.CharField(blank=True, max_length=128, null=True, verbose_name='Surname')),
+                ('first_name', models.CharField(blank=False, max_length=64, null=False, verbose_name='First Name')),
+                ('last_name', models.CharField(blank=False, max_length=128, null=False, verbose_name='Last Name')),
+                ('surname', models.CharField(blank=False, max_length=128, null=False, verbose_name='Surname')),
             ],
             options={
                 'verbose_name': 'Author',
