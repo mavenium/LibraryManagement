@@ -4,10 +4,10 @@ from django.contrib.auth.base_user import BaseUserManager
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def create_user(self, **extra_fields):
+    def create_user(self, password, **extra_fields):
         user = self.model(**extra_fields)
         user.is_superuser = False
-        user.set_unusable_password()
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
