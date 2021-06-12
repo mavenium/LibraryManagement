@@ -1,5 +1,6 @@
 from django.shortcuts import get_list_or_404
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from Content import models as ContentModels
 
@@ -37,3 +38,4 @@ class BookByPublisherList(generics.ListAPIView):
 class BookCreate(generics.CreateAPIView):
     """ Create Book object """
     serializer_class = serializers.BookCreateSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
